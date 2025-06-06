@@ -1,0 +1,27 @@
+<p>cinema-room-form works!</p>
+
+<form [formGroup]="cinemaRoomForm">
+    <mat-form-field appearance="fill">
+        <mat-label>Sala de cine</mat-label>
+        <mat-select formControlName="roomId">
+            <mat-option *ngFor="let room of rooms" [value]="room.id">
+                {{ room.name }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</form>
+
+<form [formGroup]="cinemaRoomForm">
+    <mat-form-field appearance="fill">
+        <mat-label>Pelicula</mat-label>
+        <mat-select formControlName="cinemaId">
+            <mat-option *ngFor="let cinema of cinemas" [value]="cinema.id">
+                {{ cinema.name }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</form>
+
+<button mat-raised-button color="primary" [disabled]="cinemaRoomForm.invalid" (click)="save()">
+        Guardar
+    </button>

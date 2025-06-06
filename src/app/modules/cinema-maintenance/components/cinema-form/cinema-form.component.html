@@ -1,0 +1,22 @@
+
+
+<form [formGroup]="cinemaForm">
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Nombre de la película</mat-label>
+        <input matInput formControlName="name" placeholder="Ej. Avatar">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Duración</mat-label>
+        <input matInput formControlName="duration" placeholder="Ej. 120 min">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>URL de la imagen</mat-label>
+        <input matInput formControlName="urlImage" placeholder="https:pon-un-link.com">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" [disabled]="cinemaForm.invalid" (click)="save()">
+        Guardar
+    </button>
+</form>

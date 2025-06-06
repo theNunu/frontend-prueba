@@ -1,0 +1,41 @@
+<p>room-list works!</p>
+<div>
+    <div>
+        {{ title }}
+    </div>
+
+    <div>
+        <button mat-button (click)="onRegister()">Add room</button>
+    </div>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;">
+
+    <!-- Acciones -->
+    <ng-container matColumnDef="Acciones">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+        <td mat-cell *matCellDef="let room">
+            <button mat-icon-button color="primary" (click)="onEdit(room)">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="onDelete(room)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </td> 
+    </ng-container>
+    <!-- ID -->
+    <ng-container matColumnDef="Id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let room"> {{ room.id }} </td>
+    </ng-container>
+
+    <!-- Nombre -->
+    <ng-container matColumnDef="Nombre">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let room"> {{ room.name }} </td>
+    </ng-container>
+
+    <!-- Filas -->
+    <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
+</table>
