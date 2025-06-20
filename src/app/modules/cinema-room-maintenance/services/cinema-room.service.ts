@@ -41,8 +41,8 @@ export class CinemaRoomService {
         );
     }
 
-    searchRoomStatus(roomName: string): Observable<BaseResponseI<CinemaRoomI>> {
-        return this._http.get<BaseResponseI<CinemaRoomI>>
+    searchRoomStatus(roomName: string): Observable<BaseResponseI<string>> {
+        return this._http.get<BaseResponseI<string>>
         (`${environment.apiUrl}cinema-room-asociations/room-status/${roomName}`);
     }
 }

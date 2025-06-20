@@ -109,5 +109,21 @@ export class CinemaRoomListComponent implements OnInit {
     this.router.navigate(['cinema-room-maintenance/cinema-room-create/'])
   }
 
+  checkStatus(cinemaRoom: CinemaRoomI) {
+    this.cinemaRoomService.searchRoomStatus(cinemaRoom?.room?.name).subscribe({
+      next: res => {
+        if(!res?.message) {
+          throw new Error('Se ha caido esta monda');
+        }
+
+        Swal.fire(
+          'Checando estado',
+          res?.data?.toString(),
+          'info'
+        )
+      },
+      error: (err) => console.error(err)
+    })
+  }
 
 }
