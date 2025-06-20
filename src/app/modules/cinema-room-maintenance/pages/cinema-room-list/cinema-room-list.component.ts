@@ -14,6 +14,7 @@ import { CinemaService } from '../../../cinema-maintenance/services/cinema.servi
 import { MatCardModule } from '@angular/material/card';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { MenuFormComponent } from "../../../menu-maintenance/components/menu-form/menu-form.component";
 
 @Component({
   selector: 'app-cinema-room-list',
@@ -28,8 +29,7 @@ import { Router } from '@angular/router';
     MatInputModule,
     MatTableModule,
     MatIconModule,
-    MatCardModule
-  ],
+    MatCardModule, MenuFormComponent],
   templateUrl: './cinema-room-list.component.html',
   styleUrl: './cinema-room-list.component.scss'
 })

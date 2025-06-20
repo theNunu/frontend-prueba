@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 import { MatInputModule } from '@angular/material/input';
+import { MenuFormComponent } from "../../../menu-maintenance/components/menu-form/menu-form.component";
 
 
 @Component({
@@ -21,8 +22,9 @@ import { MatInputModule } from '@angular/material/input';
     MatButtonModule,
     MatTableModule,
     MatInputModule,
-    ReactiveFormsModule
-  ],
+    ReactiveFormsModule,
+    MenuFormComponent
+],
   templateUrl: './cinema-list.component.html',
   styleUrl: './cinema-list.component.scss'
 })

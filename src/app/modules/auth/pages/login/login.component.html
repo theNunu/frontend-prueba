@@ -1,0 +1,22 @@
+<p>{{ title }}</p>
+
+<form [formGroup]="form">
+    <mat-form-field class="example-full-width">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username" placeholder="Ex. Pizza" value="user.username">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" placeholder="Ex. Pizza" value="user.password">
+    </mat-form-field>
+
+    <button mat-button (click)="validate()">
+        Login
+    </button>
+
+    <p>
+        el username es: alexkiler
+        el password es: password123
+    </p>
+</form>

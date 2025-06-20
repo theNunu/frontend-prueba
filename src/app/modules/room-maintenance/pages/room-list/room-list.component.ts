@@ -7,6 +7,7 @@ import { RoomI } from '../../interfaces/room.interface';
 import { RoomService } from '../../services/room.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { MenuFormComponent } from "../../../menu-maintenance/components/menu-form/menu-form.component";
 
 @Component({
   selector: 'app-room-list',
@@ -15,8 +16,9 @@ import Swal from 'sweetalert2';
     MatIconModule,
     MatDividerModule,
     MatButtonModule,
-    MatTableModule
-  ],
+    MatTableModule,
+    MenuFormComponent
+],
   templateUrl: './room-list.component.html',
   styleUrl: './room-list.component.scss'
 })
