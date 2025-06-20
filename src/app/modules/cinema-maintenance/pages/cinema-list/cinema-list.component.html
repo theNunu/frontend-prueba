@@ -2,6 +2,11 @@
     <div>
         {{ title }}
     </div>
+    <mat-form-field class="example-full-width">
+        <mat-label>Nombre de la peliucla</mat-label>
+        <input [formControl]="findNameCinema" matInput value="Sushi">
+    </mat-form-field>
+
 
     <div>
         <button mat-button (click)="onRegister()">Add movie</button>

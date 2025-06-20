@@ -7,6 +7,9 @@ import { CinemaI } from '../../interfaces/cinema.interface';
 import { MatTableModule } from '@angular/material/table';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { debounceTime } from 'rxjs';
+import { MatInputModule } from '@angular/material/input';
 
 
 @Component({
@@ -16,7 +19,9 @@ import Swal from 'sweetalert2';
     MatIconModule,
     MatDividerModule,
     MatButtonModule,
-    MatTableModule
+    MatTableModule,
+    MatInputModule,
+    ReactiveFormsModule
   ],
   templateUrl: './cinema-list.component.html',
   styleUrl: './cinema-list.component.scss'
@@ -33,6 +38,9 @@ export class CinemaListComponent implements OnInit {
 
   dataSource: CinemaI[] = []
 
+  findNameCinema = new FormControl('')
+  //Esto crea un campo de formulario en Angular que guarda y controla el valor del input donde escribes el nombre del emperador.
+
   constructor(
     private cinemaService: CinemaService,
     private router: Router
@@ -41,6 +49,7 @@ export class CinemaListComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getAllCinemas()
+    this.exectSearch()
   }
 
   getAllCinemas() {
@@ -49,16 +58,47 @@ export class CinemaListComponent implements OnInit {
     })
   }
 
-  postCinema() { //*******funcion de prueba *******
-    const cinema: CinemaI = {
-      name: 'jhon Salchichon',
-      duration: 150,
-      urlImage: 'https://www.google.com'
-    }
-    this.cinemaService.postCinema(cinema).subscribe(res => {
-      console.log(res)
+  exectSearch() {
+
+    this.findNameCinema.valueChanges.pipe(debounceTime(300)).subscribe({
+      next: res => {
+        this.getListByName(res ?? '');
+      }
     })
   }
+
+  getListByName(name: string) {
+    if (!name || name.trim() === '') {
+      this.getAllCinemas(); // Si el campo está vacío, recarga la lista
+      return;
+    }
+
+    this.cinemaService.getCinemaByName(name).subscribe({
+      next: res => {
+        this.dataSource = Array.isArray(res.data) && res.data.every(item => !Array.isArray(item)) && res.data !== null
+          ? res.data as CinemaI[]
+          : [];
+      },
+      error: err => {
+        console.warn('No se encontró la pelicula:', err);
+        this.dataSource = []; // Muestra tabla vacía si no se encuentra
+      }
+    });
+  }
+
+
+
+  //*******funcion de prueba *******
+  // postCinema() { 
+  //   const cinema: CinemaI = {
+  //     name: 'jhon Salchichon',
+  //     duration: 150,
+  //     urlImage: 'https://www.google.com'
+  //   }
+  //   this.cinemaService.postCinema(cinema).subscribe(res => {
+  //     console.log(res)
+  //   })
+  // }
 
   onEdit(cinema: CinemaI) {
     this.router.navigate([`cinema-maintenance/cinema-update/${cinema.id}`])

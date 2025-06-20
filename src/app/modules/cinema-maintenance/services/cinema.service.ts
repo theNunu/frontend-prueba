@@ -42,4 +42,10 @@ export class CinemaService {
       `${environment.apiUrl}cinemas/${id}`
     );
   }
+
+  getCinemaByName(name: string): Observable<BaseResponseI<CinemaI>>{
+    return this._http.get<BaseResponseI<CinemaI>>
+    ( `${environment.apiUrl}cinemas/search/${name}`)
+
+  }
 }
